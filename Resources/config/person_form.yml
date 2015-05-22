@@ -1,0 +1,24 @@
+parameters:
+    xidea_person.person.form.type.class: Xidea\Bundle\PersonBundle\Form\Type\PersonType
+    xidea_person.person.form.create.factory.default.class: Xidea\Bundle\BaseBundle\Form\Factory\FormFactory
+    xidea_person.person.form.create.handler.default.class: Xidea\Bundle\PersonBundle\Form\Handler\PersonFormHandler
+
+services:
+    xidea_person.person.form.type:
+        class: %xidea_person.person.form.type.class%
+        arguments:
+            - %xidea_person.person.class%
+        tags:
+            - { name: form.type, alias: "xidea_person" }
+    xidea_person.person.form.create.factory.default:
+        class: %xidea_person.person.form.create.factory.default.class%
+        arguments:
+            - @form.factory
+            - %xidea_person.person.form.create.name%
+            - %xidea_person.person.form.create.type%
+            - %xidea_person.person.form.create.validation_groups%
+    xidea_person.person.form.create.handler.default:
+        class: %xidea_person.person.form.create.handler.default.class%
+        arguments:
+            - @xidea_person.person.form.create.factory
+            - @event_dispatcher

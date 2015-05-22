@@ -1,0 +1,21 @@
+parameters:
+    xidea_person.person.repository.default.class: Xidea\Bundle\PersonBundle\Doctrine\ORM\Repository\PersonRepository
+    xidea_person.person.loader.default.class: Xidea\Bundle\PersonBundle\Doctrine\ORM\Loader\PersonLoader
+    xidea_person.person.manager.default.class: Xidea\Bundle\PersonBundle\Doctrine\ORM\Manager\PersonManager
+  
+services:
+    xidea_person.person.repository.default:
+        class: %xidea_person.person.repository.default.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - %xidea_person.person.class%
+    xidea_person.person.loader.default:
+        class: %xidea_person.person.loader.default.class%
+        arguments:
+            - @xidea_person.person.repository.default
+    xidea_person.person.manager.default:
+        class: %xidea_person.person.manager.default.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @event_dispatcher

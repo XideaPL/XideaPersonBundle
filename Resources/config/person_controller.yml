@@ -1,0 +1,33 @@
+parameters:
+    xidea_person.controller.list.class: Xidea\Bundle\PersonBundle\Controller\Person\ListController
+    xidea_person.controller.show.class: Xidea\Bundle\PersonBundle\Controller\Person\ShowController
+    xidea_person.controller.create.class: Xidea\Bundle\PersonBundle\Controller\Person\CreateController
+  
+services:
+    xidea_person.controller.list:
+        class: %xidea_person.controller.list.class%
+        arguments:
+            - @xidea_person.person.configuration
+            - @xidea_person.person.loader
+        calls:
+            - [setEventDispatcher, [@event_dispatcher]]
+            - [setTemplating, [@templating]]
+    xidea_person.controller.show:
+        class: %xidea_person.controller.show.class%
+        arguments:
+            - @xidea_person.person.configuration
+            - @xidea_person.person.loader
+        calls:
+            - [setEventDispatcher, [@event_dispatcher]]
+            - [setTemplating, [@templating]]
+    xidea_person.controller.create:
+        class: %xidea_person.controller.create.class%
+        arguments:
+            - @xidea_person.person.configuration
+            - @xidea_person.person.factory
+            - @xidea_person.person.manager
+            - @xidea_person.person.form.create.handler
+        calls:
+            - [setEventDispatcher, [@event_dispatcher]]
+            - [setRouter, [@router]]
+            - [setTemplating, [@templating]]

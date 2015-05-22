@@ -1,0 +1,18 @@
+person:
+    label: Firma
+    name: Nazwa
+
+person_form:
+    create:
+        submit: Utwórz
+        
+person_list:
+        title: Firmy
+        
+person_show:
+        title: %person_name%
+        details:
+            title: Szczegóły firmy
+            
+person_create:
+        title: Nowa firma

@@ -1,0 +1,13 @@
+xidea_person_list:
+    pattern:  /persons
+    defaults: { _controller: xidea_person.controller.list:listAction }
+ 
+xidea_person_show:
+    pattern:  /persons/{id}
+    defaults: { _controller: xidea_person.controller.show:showAction }
+    requirements:
+        id:  \d+
+    
+xidea_person_create:
+    pattern:  /persons/create
+    defaults: { _controller: xidea_person.controller.create:createAction }

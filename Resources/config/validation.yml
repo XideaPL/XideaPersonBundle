@@ -1,0 +1,4 @@
+Xidea\Component\Person\Model\AbstractPerson:
+    properties:
+        name:
+            - NotBlank: {}
