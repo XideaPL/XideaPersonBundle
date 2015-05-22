@@ -1,5 +1,5 @@
 person:
-    label: Firma
+    label: Osoba
     name: Nazwa
 
 person_form:
@@ -7,12 +7,12 @@ person_form:
         submit: Utwórz
         
 person_list:
-        title: Firmy
+        title: Osoby
         
 person_show:
-        title: %person_name%
-        details:
-            title: Szczegóły firmy
+    title: %person_name%
+    details:
+        title: Szczegóły osoby
             
 person_create:
-        title: Nowa firma
+        title: Nowa osoby
