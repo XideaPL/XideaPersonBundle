@@ -10,9 +10,9 @@ person_list:
         title: Osoby
         
 person_show:
-    title: %person_name%
+    title: %name%
     details:
         title: Szczegóły osoby
             
 person_create:
-        title: Nowa osoby
+        title: Nowa osoba
