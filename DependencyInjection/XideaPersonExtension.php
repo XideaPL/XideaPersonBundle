@@ -23,14 +23,20 @@ class XideaPersonExtension extends AbstractExtension
 
         $loader->load('person.yml');
         $loader->load('person_orm.yml');
-        $loader->load('person_controller.yml');
-        $loader->load('person_form.yml');
+        $loader->load('controller.yml');
+        $loader->load('form.yml');
+        $loader->load('template.yml');
 
         $this->loadPersonSection($config['person'], $container, $loader);
+        
+        if (isset($config['template'])) {
+            $this->loadTemplateSection($this->getAlias(), $config['template'], $container, $loader);
+        }
     }
     
     protected function loadPersonSection(array $config, ContainerBuilder $container, Loader\YamlFileLoader $loader)
     {
+        $container->setParameter('xidea_person.person.code', $config['code']);
         $container->setParameter('xidea_person.person.class', $config['class']);
         $container->setAlias('xidea_person.person.configuration', $config['configuration']);
         $container->setAlias('xidea_person.person.factory', $config['factory']);
@@ -40,24 +46,33 @@ class XideaPersonExtension extends AbstractExtension
         if (!empty($config['form'])) {
             $this->loadPersonFormSection($config['form'], $container, $loader);
         }
-        
-        if(isset($config['template'])) {
-            $this->loadTemplateSection(sprintf('%s.%s', $this->getAlias(), 'person'), $config['template'], $container, $loader);
-        }
     }
     
     protected function loadPersonFormSection(array $config, ContainerBuilder $container, Loader\YamlFileLoader $loader)
     {
-        $container->setAlias('xidea_person.person.form.create.factory', $config['create']['factory']);
-        $container->setAlias('xidea_person.person.form.create.handler', $config['create']['handler']);
+        $container->setAlias('xidea_person.person.form.factory', $config['person']['factory']);
+        $container->setAlias('xidea_person.person.form.handler', $config['person']['handler']);
         
-        $container->setParameter('xidea_person.person.form.create.type', $config['create']['type']);
-        $container->setParameter('xidea_person.person.form.create.name', $config['create']['name']);
-        $container->setParameter('xidea_person.person.form.create.validation_groups', $config['create']['validation_groups']);
+        $container->setParameter('xidea_person.person.form.type', $config['person']['type']);
+        $container->setParameter('xidea_person.person.form.name', $config['person']['name']);
+        $container->setParameter('xidea_person.person.form.validation_groups', $config['person']['validation_groups']);
     }
     
     protected function getConfigurationDirectory()
     {
         return __DIR__.'/../Resources/config';
+    }
+    
+    protected function getDefaultTemplates()
+    {
+        return [
+            'main' => ['namespace' => '', 'path' => 'main'],
+            'person_main' => ['path' => 'main'],
+            'person_list' => ['path' => 'Person/List/list'],
+            'person_show' => ['path' => 'Person/Show/show'],
+            'person_create' => ['path' => 'Person/Create/create'],
+            'person_form' => ['path' => 'Person/Form/form'],
+            'person_form_fields' => ['path' => 'Person/Form/fields']
+        ];
     }
 }

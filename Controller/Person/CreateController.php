@@ -41,6 +41,8 @@ class CreateController extends AbstractCreateController
         parent::__construct($configuration, $modelManager, $formHandler);
 
         $this->personFactory = $personFactory;
+        $this->createTemplate = 'person_create';
+        $this->createFormTemplate = 'person_create_form';
     }
 
     protected function createModel()

@@ -1,19 +1,15 @@
 parameters:
     xidea_person.person.configuration.default.class: Xidea\Bundle\BaseBundle\Configuration
     xidea_person.person.factory.default.class: Xidea\Component\Base\Factory\ModelFactory
-    xidea_person.person.template.configuration.default.class: Xidea\Bundle\BaseBundle\TemplateConfiguration
   
 services:
     xidea_person.person.configuration.default:
         class: %xidea_person.person.configuration.default.class%
         arguments:
-            - @xidea_person.person.template.configuration
-    xidea_person.person.template.configuration.default:
-        class: %xidea_person.person.template.configuration.default.class%
-        arguments:
-            - %xidea_person.person.template.namespace%
-            - %xidea_person.person.template.templates%
-            - %xidea_person.person.template.engine%
+            - %xidea_person.person.code%
+            - @xidea_person.template.configuration
+        tags:
+            - { name: xidea_base.configuration }
     xidea_person.person.factory.default:
         class: %xidea_person.person.factory.default.class%
         arguments:

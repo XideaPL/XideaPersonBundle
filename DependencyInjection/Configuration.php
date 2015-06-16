@@ -27,13 +27,14 @@ class Configuration extends AbstractConfiguration
         $rootNode = $treeBuilder->root($this->alias);
         
         $this->addPersonSection($rootNode);
+        $this->addTemplateSection($rootNode);
 
         return $treeBuilder;
     }
     
     public function getDefaultTemplateNamespace()
     {
-        return 'XideaPersonBundle';
+        return '@XideaPerson';
     }
     
     protected function addPersonSection(ArrayNodeDefinition $node)
@@ -43,6 +44,7 @@ class Configuration extends AbstractConfiguration
                 ->arrayNode('person')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('code')->defaultValue('xidea_person')->end()
                         ->scalarNode('class')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('configuration')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('factory')->defaultValue('xidea_person.person.factory.default')->end()
@@ -52,13 +54,13 @@ class Configuration extends AbstractConfiguration
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->arrayNode('create')
+                                ->arrayNode('person')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('factory')->defaultValue('xidea_person.person.form.create.factory.default')->end()
-                                        ->scalarNode('handler')->defaultValue('xidea_person.person.form.create.handler.default')->end()
-                                        ->scalarNode('type')->defaultValue('xidea_person_create')->end()
-                                        ->scalarNode('name')->defaultValue('xidea_person_create_form')->end()
+                                        ->scalarNode('factory')->defaultValue('xidea_person.person.form.factory.default')->end()
+                                        ->scalarNode('handler')->defaultValue('xidea_person.person.form.handler.default')->end()
+                                        ->scalarNode('type')->defaultValue('xidea_person')->end()
+                                        ->scalarNode('name')->defaultValue('xidea_person_form')->end()
                                         ->arrayNode('validation_groups')
                                             ->prototype('scalar')->end()
                                             ->defaultValue(array())
@@ -67,22 +69,16 @@ class Configuration extends AbstractConfiguration
                                 ->end()
                             ->end()
                         ->end()
-                        ->append($this->addTemplateNode($this->getDefaultTemplateNamespace(), $this->getDefaultTemplateEngine(), array(
-                            'list' => array(
-                                'path' => 'Person\List:list'
-                            ),
-                            'show' => array(
-                                'path' => 'Person\Show:show'
-                            ),
-                            'create' => array(
-                                'path' => 'Person\Create:create'
-                            ),
-                            'create_form' => array(
-                                'path' => 'Person\Create:create_form'
-                            )
-                        )))
                     ->end()
                 ->end()
+            ->end();
+    }
+    
+    protected function addTemplateSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->append($this->addTemplateNode($this->getDefaultTemplateNamespace(), $this->getDefaultTemplateEngine(), [], true))
             ->end();
     }
 
