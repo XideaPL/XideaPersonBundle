@@ -7,7 +7,6 @@ services:
         class: %xidea_person.person.configuration.default.class%
         arguments:
             - %xidea_person.person.code%
-            - @xidea_person.template.configuration
         tags:
             - { name: xidea_base.configuration }
     xidea_person.person.factory.default:

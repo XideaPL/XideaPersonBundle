@@ -32,11 +32,6 @@ class Configuration extends AbstractConfiguration
         return $treeBuilder;
     }
     
-    public function getDefaultTemplateNamespace()
-    {
-        return '@XideaPerson';
-    }
-    
     protected function addPersonSection(ArrayNodeDefinition $node)
     {
         $node
@@ -60,7 +55,7 @@ class Configuration extends AbstractConfiguration
                                         ->scalarNode('factory')->defaultValue('xidea_person.person.form.factory.default')->end()
                                         ->scalarNode('handler')->defaultValue('xidea_person.person.form.handler.default')->end()
                                         ->scalarNode('type')->defaultValue('xidea_person')->end()
-                                        ->scalarNode('name')->defaultValue('xidea_person_form')->end()
+                                        ->scalarNode('name')->defaultValue('person')->end()
                                         ->arrayNode('validation_groups')
                                             ->prototype('scalar')->end()
                                             ->defaultValue(array())
@@ -73,13 +68,4 @@ class Configuration extends AbstractConfiguration
                 ->end()
             ->end();
     }
-    
-    protected function addTemplateSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->append($this->addTemplateNode($this->getDefaultTemplateNamespace(), $this->getDefaultTemplateEngine(), [], true))
-            ->end();
-    }
-
 }

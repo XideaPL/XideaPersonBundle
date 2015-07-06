@@ -25,13 +25,10 @@ class XideaPersonExtension extends AbstractExtension
         $loader->load('person_orm.yml');
         $loader->load('controller.yml');
         $loader->load('form.yml');
-        $loader->load('template.yml');
 
         $this->loadPersonSection($config['person'], $container, $loader);
         
-        if (isset($config['template'])) {
-            $this->loadTemplateSection($this->getAlias(), $config['template'], $container, $loader);
-        }
+        $this->loadTemplateSection($config, $container, $loader);
     }
     
     protected function loadPersonSection(array $config, ContainerBuilder $container, Loader\YamlFileLoader $loader)
@@ -66,13 +63,12 @@ class XideaPersonExtension extends AbstractExtension
     protected function getDefaultTemplates()
     {
         return [
-            'main' => ['namespace' => '', 'path' => 'main'],
-            'person_main' => ['path' => 'main'],
-            'person_list' => ['path' => 'Person/List/list'],
-            'person_show' => ['path' => 'Person/Show/show'],
-            'person_create' => ['path' => 'Person/Create/create'],
-            'person_form' => ['path' => 'Person/Form/form'],
-            'person_form_fields' => ['path' => 'Person/Form/fields']
+            'person_main' => ['path' => '@XideaPerson/main'],
+            'person_list' => ['path' => '@XideaPerson/Person/List/list'],
+            'person_show' => ['path' => '@XideaPerson/Person/Show/show'],
+            'person_create' => ['path' => '@XideaPerson/Person/Create/create'],
+            'person_form' => ['path' => '@XideaPerson/Person/Form/form'],
+            'person_form_fields' => ['path' => '@XideaPerson/Person/Form/fields']
         ];
     }
 }
