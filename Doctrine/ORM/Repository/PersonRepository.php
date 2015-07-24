@@ -16,4 +16,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class PersonRepository extends EntityRepository implements PersonRepositoryInterface
 {
+    public function findQb()
+    {
+        $qb = $this->createQueryBuilder('o');
+        
+        return $qb;
+    }
 }

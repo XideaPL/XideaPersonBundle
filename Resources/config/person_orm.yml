@@ -14,6 +14,8 @@ services:
         class: %xidea_person.person.loader.default.class%
         arguments:
             - @xidea_person.person.repository.default
+            - @xidea_person.person.configuration
+            - @xidea_base.paginator
     xidea_person.person.manager.default:
         class: %xidea_person.person.manager.default.class%
         arguments:

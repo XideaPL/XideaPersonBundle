@@ -9,10 +9,10 @@
 
 namespace Xidea\Bundle\PersonBundle\Doctrine\ORM\Loader;
 
-use Doctrine\ORM\EntityManager,
-    Doctrine\ORM\EntityRepository;
-
-use Xidea\Component\Person\Loader\PersonLoaderInterface;
+use Xidea\Component\Person\Loader\PersonLoaderInterface,
+    Xidea\Bundle\PersonBundle\Doctrine\ORM\Repository\PersonRepositoryInterface;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface,
+    Xidea\Bundle\BaseBundle\Pagination\PaginatorInterface;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
@@ -20,19 +20,32 @@ use Xidea\Component\Person\Loader\PersonLoaderInterface;
 class PersonLoader implements PersonLoaderInterface
 {
     /*
-     * @var EntityRepository
+     * @var PersonRepositoryInterface
      */
-    protected $personRepository;
+    protected $repository;
+    
+    /*
+     * @var ConfigurationInterface
+     */
+    protected $configuration;
+    
+    /*
+     * @var PaginatorInterface
+     */
+    protected $paginator;
     
     /**
      * Constructs a comment repository.
      *
-     * @param string $class The class
-     * @param EntityManager The entity manager
+     * @param PersonRepositoryInterface $repository The repository
+     * @param ConfigurationInterface $configuration The configuration
+     * @param PaginatorInterface $paginator The paginator
      */
-    public function __construct(EntityRepository $personRepository)
+    public function __construct(PersonRepositoryInterface $repository, ConfigurationInterface $configuration, PaginatorInterface $paginator)
     {
-        $this->personRepository = $personRepository;
+        $this->repository = $repository;
+        $this->configuration = $configuration;
+        $this->paginator = $paginator;
     }
 
     /**
@@ -40,7 +53,7 @@ class PersonLoader implements PersonLoaderInterface
      */
     public function load($id)
     {
-        return $this->personRepository->find($id);
+        return $this->repository->find($id);
     }
 
     /**
@@ -48,7 +61,7 @@ class PersonLoader implements PersonLoaderInterface
      */
     public function loadAll()
     {
-        return $this->personRepository->findAll();
+        return $this->repository->findAll();
     }
 
     /*
@@ -56,7 +69,7 @@ class PersonLoader implements PersonLoaderInterface
      */
     public function loadBy(array $criteria, array $orderBy = array(), $limit = null, $offset = null)
     {
-        return $this->personRepository->findBy($criteria, $orderBy, $limit, $offset);
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
     
     /*
@@ -64,6 +77,16 @@ class PersonLoader implements PersonLoaderInterface
      */
     public function loadOneBy(array $criteria, array $orderBy = array())
     {
-        return $this->personRepository->findOneBy($criteria, $orderBy);
+        return $this->repository->findOneBy($criteria, $orderBy);
+    }
+    
+    /*
+     * @return PaginationInterface
+     */
+    public function loadByPage($page = 1, $limit = 25)
+    {
+        $qb = $this->repository->findQb();
+        
+        return $this->paginator->paginate($qb, $page, $limit);
     }
 }

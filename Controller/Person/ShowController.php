@@ -24,19 +24,27 @@ class ShowController extends AbstractShowController
     /*
      * @var PersonLoaderInterface
      */
-    protected $personLoader;
+    protected $loader;
 
-    public function __construct(ConfigurationInterface $configuration, PersonLoaderInterface $personLoader)
+    /**
+     * 
+     * @param ConfigurationInterface $configuration
+     * @param PersonLoaderInterface $loader
+     */
+    public function __construct(ConfigurationInterface $configuration, PersonLoaderInterface $loader)
     {
         parent::__construct($configuration);
 
-        $this->personLoader = $personLoader;
+        $this->loader = $loader;
         $this->showTemplate = 'person_show';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function loadModel($id)
     {
-        $person = $this->personLoader->load($id);
+        $person = $this->loader->load($id);
 
         if (!$person instanceof PersonInterface) {
             throw new NotFoundHttpException('person.not_found');
@@ -45,6 +53,9 @@ class ShowController extends AbstractShowController
         return $person;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function onPreShow($model, Request $request)
     {
         return;

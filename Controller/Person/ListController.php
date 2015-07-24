@@ -22,21 +22,35 @@ class ListController extends AbstractListController
     /*
      * @var PersonLoaderInterface
      */
-    protected $personLoader;
+    protected $loader;
 
-    public function __construct(ConfigurationInterface $configuration, PersonLoaderInterface $personLoader)
+    /**
+     * 
+     * @param ConfigurationInterface $configuration
+     * @param PersonLoaderInterface $loader
+     */
+    public function __construct(ConfigurationInterface $configuration, PersonLoaderInterface $loader)
     {
         parent::__construct($configuration);
         
-        $this->personLoader = $personLoader;
+        $this->loader = $loader;
         $this->listTemplate = 'person_list';
     }
     
+    /**
+     * {@inheritdoc}
+     */
     protected function loadModels(Request $request)
     {
-        return $this->personLoader->loadAll();
+        return $this->loader->loadByPage(
+            $request->query->get($this->configuration->getPaginationParameterName(), 1),
+            $this->configuration->getPaginationLimit()
+        );
     }
     
+    /**
+     * {@inheritdoc}
+     */
     protected function onPreList($models, Request $request)
     {
         return;

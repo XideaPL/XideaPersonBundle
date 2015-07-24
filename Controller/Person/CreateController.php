@@ -28,28 +28,35 @@ class CreateController extends AbstractCreateController
     /*
      * @var ModelFactoryInterface
      */
+    protected $factory;
 
-    protected $personFactory;
-
-    /*
-     * @var PersonManagerInterface
+    /**
+     * 
+     * @param ConfigurationInterface $configuration
+     * @param ModelFactoryInterface $factory
+     * @param PersonManagerInterface $manager
+     * @param FormHandlerInterface $formHandler
      */
-    protected $personManager;
-
-    public function __construct(ConfigurationInterface $configuration, ModelFactoryInterface $personFactory, PersonManagerInterface $modelManager, FormHandlerInterface $formHandler)
+    public function __construct(ConfigurationInterface $configuration, ModelFactoryInterface $factory, PersonManagerInterface $manager, FormHandlerInterface $formHandler)
     {
-        parent::__construct($configuration, $modelManager, $formHandler);
+        parent::__construct($configuration, $manager, $formHandler);
 
-        $this->personFactory = $personFactory;
+        $this->factory = $factory;
         $this->createTemplate = 'person_create';
         $this->createFormTemplate = 'person_create_form';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function createModel()
     {
-        return $this->personFactory->create();
+        return $this->factory->create();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function onPreCreate($model, Request $request)
     {
         $this->dispatch(PersonEvents::PRE_CREATE, $event = new GetPersonResponseEvent($model, $request));
@@ -57,6 +64,9 @@ class CreateController extends AbstractCreateController
         return $event->getResponse();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function onCreateSuccess($model, Request $request)
     {
         $this->dispatch(PersonEvents::CREATE_SUCCESS, $event = new GetPersonResponseEvent($model, $request));
@@ -70,6 +80,9 @@ class CreateController extends AbstractCreateController
         return $response;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function onCreateCompleted($model, Request $request, Response $response)
     {
         $this->dispatch(PersonEvents::CREATE_COMPLETED, new FilterPersonResponseEvent($model, $request, $response));
