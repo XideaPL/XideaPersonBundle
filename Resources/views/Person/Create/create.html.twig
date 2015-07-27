@@ -3,19 +3,15 @@
     <h1 class="page-header">{{ 'person_create.title'|trans }}</h1>
 {% endblock %}
 {% block bundle_main %}
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'person_create.title'|trans }}
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ include(xidea_template('person_form')) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+    <div class="box box-default">
+        <div class="box-header">
+            <h3 class="box-title">{{ 'person_create.title'|trans }}</h3>
         </div>
+        <!-- /.box-heading -->
+        <div class="box-body">
+            {{ include(xidea_template('person_form')) }}
+        </div>
+        <!-- /.box-body -->
     </div>
+    <!-- /.box -->
 {% endblock %}

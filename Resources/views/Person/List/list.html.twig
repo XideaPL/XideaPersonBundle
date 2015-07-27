@@ -3,37 +3,34 @@
     <h1 class="page-header">{{ 'person_list.title'|trans }}</h1>
 {% endblock %}
 {% block bundle_main %}
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'person_list.title'|trans }}
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ 'person.name'|trans }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for model in models %}
-                                    <tr>
-                                        <td>{{ model.id }}</td>
-                                        <td>{{ model.name }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.table-responsive -->
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+    <div class="box box-default person-box">
+        <div class="box-header">
+            <h3 class="box-title">{{ 'person_list.title'|trans }}</h3>
         </div>
+        <!-- /.box-heading -->
+        <div class="box-body">
+            <div class="person-list table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ xidea_base_sorting(models.sorting, 'person.name'|trans, 'p.name') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for model in models %}
+                            <tr>
+                                <td>{{ model.id }}</td>
+                                <td>{{ model.name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {{ xidea_base_pagination(models) }}
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.box-body -->
     </div>
+    <!-- /.box -->
 {% endblock %}

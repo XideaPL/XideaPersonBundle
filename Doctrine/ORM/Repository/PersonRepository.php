@@ -18,7 +18,7 @@ class PersonRepository extends EntityRepository implements PersonRepositoryInter
 {
     public function findQb()
     {
-        $qb = $this->createQueryBuilder('o');
+        $qb = $this->createQueryBuilder('p');
         
         return $qb;
     }
