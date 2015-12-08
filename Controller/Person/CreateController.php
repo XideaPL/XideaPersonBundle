@@ -9,16 +9,16 @@
 
 namespace Xidea\Bundle\PersonBundle\Controller\Person;
 
-use Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Xidea\Component\Base\Factory\ModelFactoryInterface;
-use Xidea\Component\Person\Manager\PersonManagerInterface;
-use Xidea\Bundle\BaseBundle\ConfigurationInterface,
-    Xidea\Bundle\BaseBundle\Controller\AbstractCreateController,
-    Xidea\Bundle\BaseBundle\Form\Handler\FormHandlerInterface;
-use Xidea\Bundle\PersonBundle\PersonEvents,
-    Xidea\Bundle\PersonBundle\Event\GetPersonResponseEvent,
-    Xidea\Bundle\PersonBundle\Event\FilterPersonResponseEvent;
+use Xidea\Person\ManagerInterface;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface;
+use Xidea\Bundle\BaseBundle\Controller\AbstractCreateController;
+use Xidea\Bundle\BaseBundle\Form\Handler\FormHandlerInterface;
+use Xidea\Bundle\PersonBundle\PersonEvents;
+use Xidea\Bundle\PersonBundle\Event\GetPersonResponseEvent;
+use Xidea\Bundle\PersonBundle\Event\FilterPersonResponseEvent;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
@@ -34,10 +34,10 @@ class CreateController extends AbstractCreateController
      * 
      * @param ConfigurationInterface $configuration
      * @param ModelFactoryInterface $factory
-     * @param PersonManagerInterface $manager
+     * @param ManagerInterface $manager
      * @param FormHandlerInterface $formHandler
      */
-    public function __construct(ConfigurationInterface $configuration, ModelFactoryInterface $factory, PersonManagerInterface $manager, FormHandlerInterface $formHandler)
+    public function __construct(ConfigurationInterface $configuration, ModelFactoryInterface $factory, ManagerInterface $manager, FormHandlerInterface $formHandler)
     {
         parent::__construct($configuration, $manager, $formHandler);
 

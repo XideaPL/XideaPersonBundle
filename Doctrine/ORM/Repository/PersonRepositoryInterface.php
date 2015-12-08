@@ -17,7 +17,7 @@ interface PersonRepositoryInterface
     /*
      * @param int $id
      * 
-     * @return \Xidea\Component\Person\Model\PersonInterface
+     * @return \Xidea\Person\Model\PersonInterface
      */
     function find($id);
     

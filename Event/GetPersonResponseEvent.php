@@ -9,10 +9,9 @@
 
 namespace Xidea\Bundle\PersonBundle\Event;
 
-use Symfony\Component\HttpFoundation\Response,
-    Symfony\Component\HttpFoundation\Request;
-
-use Xidea\Component\Person\Model\PersonInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Xidea\Person\PersonInterface;
 
 /**
  *

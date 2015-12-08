@@ -1,4 +1,4 @@
-Xidea\Component\Person\Model\AbstractPerson:
+Xidea\Person\Model\AbstractPerson:
     type: mappedSuperclass
     id:
         id:

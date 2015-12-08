@@ -9,15 +9,15 @@
 
 namespace Xidea\Bundle\PersonBundle\Doctrine\ORM\Loader;
 
-use Xidea\Component\Person\Loader\PersonLoaderInterface,
-    Xidea\Bundle\PersonBundle\Doctrine\ORM\Repository\PersonRepositoryInterface;
-use Xidea\Bundle\BaseBundle\ConfigurationInterface,
-    Xidea\Bundle\BaseBundle\Pagination\PaginatorInterface;
+use Xidea\Person\LoaderInterface;
+use Xidea\Bundle\PersonBundle\Doctrine\ORM\Repository\PersonRepositoryInterface;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface;
+use Xidea\Bundle\BaseBundle\Pagination\PaginatorInterface;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-class PersonLoader implements PersonLoaderInterface
+class PersonLoader implements LoaderInterface
 {
     /*
      * @var PersonRepositoryInterface

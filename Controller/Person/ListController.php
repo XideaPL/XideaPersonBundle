@@ -10,9 +10,9 @@
 namespace Xidea\Bundle\PersonBundle\Controller\Person;
 
 use Symfony\Component\HttpFoundation\Request;
-use Xidea\Component\Person\Loader\PersonLoaderInterface;
-use Xidea\Bundle\BaseBundle\ConfigurationInterface,
-    Xidea\Bundle\BaseBundle\Controller\AbstractListController;
+use Xidea\Person\LoaderInterface;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface;
+use Xidea\Bundle\BaseBundle\Controller\AbstractListController;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
@@ -20,16 +20,16 @@ use Xidea\Bundle\BaseBundle\ConfigurationInterface,
 class ListController extends AbstractListController
 {
     /*
-     * @var PersonLoaderInterface
+     * @var LoaderInterface
      */
     protected $loader;
 
     /**
      * 
      * @param ConfigurationInterface $configuration
-     * @param PersonLoaderInterface $loader
+     * @param LoaderInterface $loader
      */
-    public function __construct(ConfigurationInterface $configuration, PersonLoaderInterface $loader)
+    public function __construct(ConfigurationInterface $configuration, LoaderInterface $loader)
     {
         parent::__construct($configuration);
         

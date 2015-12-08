@@ -12,13 +12,13 @@ namespace Xidea\Bundle\PersonBundle\Doctrine\ORM\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManager;
 use Xidea\Component\Base\Doctrine\ORM\Manager\ModelManagerInterface;
-use Xidea\Component\Person\Manager\PersonManagerInterface,
-    Xidea\Component\Person\Model\PersonInterface;
+use Xidea\Person\ManagerInterface;
+use Xidea\Person\PersonInterface;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-class PersonManager implements ModelManagerInterface, PersonManagerInterface
+class PersonManager implements ModelManagerInterface, ManagerInterface
 {
     /*
      * @var bool

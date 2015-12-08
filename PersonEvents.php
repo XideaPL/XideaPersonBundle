@@ -9,11 +9,11 @@
 
 namespace Xidea\Bundle\PersonBundle;
 
-use Xidea\Component\Person\PersonEvents as BasePersonEvents;
+use Xidea\Person\Events;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-final class PersonEvents extends BasePersonEvents
+final class PersonEvents extends Events
 {
 }

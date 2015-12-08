@@ -8,6 +8,6 @@ class XideaPersonBundle extends AbstractBundle
 {
     protected function getModelNamespace()
     {
-        return 'Xidea\Component\Person\Model';
+        return 'Xidea\Person';
     }
 }

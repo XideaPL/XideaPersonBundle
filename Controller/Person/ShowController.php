@@ -11,10 +11,10 @@ namespace Xidea\Bundle\PersonBundle\Controller\Person;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Xidea\Component\Person\Loader\PersonLoaderInterface;
-use Xidea\Bundle\BaseBundle\ConfigurationInterface,
-    Xidea\Bundle\BaseBundle\Controller\AbstractShowController;
-use Xidea\Component\Person\Model\PersonInterface;
+use Xidea\Person\LoaderInterface;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface;
+use Xidea\Bundle\BaseBundle\Controller\AbstractShowController;
+use Xidea\Person\Model\PersonInterface;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
@@ -22,16 +22,16 @@ use Xidea\Component\Person\Model\PersonInterface;
 class ShowController extends AbstractShowController
 {
     /*
-     * @var PersonLoaderInterface
+     * @var LoaderInterface
      */
     protected $loader;
 
     /**
      * 
      * @param ConfigurationInterface $configuration
-     * @param PersonLoaderInterface $loader
+     * @param LoaderInterface $loader
      */
-    public function __construct(ConfigurationInterface $configuration, PersonLoaderInterface $loader)
+    public function __construct(ConfigurationInterface $configuration, LoaderInterface $loader)
     {
         parent::__construct($configuration);
 
