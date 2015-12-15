@@ -17,7 +17,7 @@ use Xidea\Person\PersonInterface;
  *
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-class GetPersonResponseEvent extends PersonEvent
+class GetResponseEvent extends PersonEvent
 {
 
     private $response;

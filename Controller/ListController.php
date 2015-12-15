@@ -7,17 +7,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Xidea\Bundle\PersonBundle\Controller\Person;
+namespace Xidea\Bundle\PersonBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Xidea\Person\LoaderInterface;
-use Xidea\Bundle\BaseBundle\ConfigurationInterface;
-use Xidea\Bundle\BaseBundle\Controller\AbstractListController;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface,
+    Xidea\Bundle\BaseBundle\Controller\AbstractController;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-class ListController extends AbstractListController
+class ListController extends AbstractController
 {
     /*
      * @var LoaderInterface
@@ -34,11 +34,25 @@ class ListController extends AbstractListController
         parent::__construct($configuration);
         
         $this->loader = $loader;
-        $this->listTemplate = 'person_list';
     }
     
     /**
-     * {@inheritdoc}
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function listAction(Request $request)
+    {
+        $models = $this->loadModels($request);
+        
+        return $this->render('person_list', array(
+            'models' => $models
+        ));
+    }
+    
+    /**
+     * @param Request $request
+     * @return array
      */
     protected function loadModels(Request $request)
     {
@@ -46,13 +60,5 @@ class ListController extends AbstractListController
             $request->query->get($this->configuration->getPaginationParameterName(), 1),
             $this->configuration->getPaginationLimit()
         );
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function onPreList($models, Request $request)
-    {
-        return;
     }
 }

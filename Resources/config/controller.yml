@@ -1,7 +1,7 @@
 parameters:
-    xidea_person.controller.list.class: Xidea\Bundle\PersonBundle\Controller\Person\ListController
-    xidea_person.controller.show.class: Xidea\Bundle\PersonBundle\Controller\Person\ShowController
-    xidea_person.controller.create.class: Xidea\Bundle\PersonBundle\Controller\Person\CreateController
+    xidea_person.controller.list.class: Xidea\Bundle\PersonBundle\Controller\ListController
+    xidea_person.controller.show.class: Xidea\Bundle\PersonBundle\Controller\ShowController
+    xidea_person.controller.create.class: Xidea\Bundle\PersonBundle\Controller\CreateController
   
 services:
     xidea_person.controller.list:

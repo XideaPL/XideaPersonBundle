@@ -7,25 +7,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Xidea\Bundle\PersonBundle\Controller\Person;
+namespace Xidea\Bundle\PersonBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Xidea\Person\LoaderInterface;
-use Xidea\Bundle\BaseBundle\ConfigurationInterface;
-use Xidea\Bundle\BaseBundle\Controller\AbstractShowController;
-use Xidea\Person\Model\PersonInterface;
+use Xidea\Bundle\BaseBundle\ConfigurationInterface,
+    Xidea\Bundle\BaseBundle\Controller\AbstractController;
+use Xidea\Person\PersonInterface;
 
 /**
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-class ShowController extends AbstractShowController
+class ShowController extends AbstractController
 {
     /*
      * @var LoaderInterface
      */
     protected $loader;
-
+    
     /**
      * 
      * @param ConfigurationInterface $configuration
@@ -36,11 +36,27 @@ class ShowController extends AbstractShowController
         parent::__construct($configuration);
 
         $this->loader = $loader;
-        $this->showTemplate = 'person_show';
+    }
+    
+    /**
+     * 
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function showAction($id, Request $request)
+    {
+        $model = $this->loadModel($id);
+        
+        return $this->render('person_show', array(
+            'model' => $model
+        ));
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $id
+     * 
+     * @return PersonInterface|null
      */
     protected function loadModel($id)
     {
@@ -51,13 +67,5 @@ class ShowController extends AbstractShowController
         }
 
         return $person;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function onPreShow($model, Request $request)
-    {
-        return;
     }
 }

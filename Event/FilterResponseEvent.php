@@ -17,7 +17,7 @@ use Xidea\Person\PersonInterface;
  *
  * @author Artur Pszczółka <a.pszczolka@xidea.pl>
  */
-class FilterPersonResponseEvent extends PersonEvent
+class FilterResponseEvent extends PersonEvent
 {
 
     private $response;
