@@ -1,1 +1,4 @@
-# XideaPersonBundle
+XideaPersonBundle
+=================
+
+IN DEVELOPMENT

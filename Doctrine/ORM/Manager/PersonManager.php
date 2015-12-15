@@ -11,7 +11,7 @@ namespace Xidea\Bundle\PersonBundle\Doctrine\ORM\Manager;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManager;
-use Xidea\Component\Base\Doctrine\ORM\Manager\ModelManagerInterface;
+use Xidea\Base\Model\Manager\Doctrine\ORM\ManagerInterface as ModelManagerInterface;
 use Xidea\Person\ManagerInterface;
 use Xidea\Person\PersonInterface;
 

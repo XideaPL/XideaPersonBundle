@@ -11,7 +11,7 @@ namespace Xidea\Bundle\PersonBundle\Controller\Person;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Xidea\Component\Base\Factory\ModelFactoryInterface;
+use Xidea\Base\Model\FactoryInterface as ModelFactoryInterface;
 use Xidea\Person\ManagerInterface;
 use Xidea\Bundle\BaseBundle\ConfigurationInterface;
 use Xidea\Bundle\BaseBundle\Controller\AbstractCreateController;
