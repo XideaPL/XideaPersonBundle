@@ -1,8 +1,18 @@
 parameters:
-    xidea_person.person.configuration.default.class: Xidea\Bundle\BaseBundle\Configuration
+    #services
+    xidea_person.person.configuration.default.class: Xidea\Base\Configuration\DefaultConfiguration
     xidea_person.person.factory.default.class: Xidea\Base\Model\Factory\DefaultFactory
+    #controllers
+    xidea_person.controller.list.class: Xidea\Bundle\PersonBundle\Controller\ListController
+    xidea_person.controller.show.class: Xidea\Bundle\PersonBundle\Controller\ShowController
+    xidea_person.controller.create.class: Xidea\Bundle\PersonBundle\Controller\CreateController
+    #forms
+    xidea_person.person.form.type.class: Xidea\Bundle\PersonBundle\Form\Type\PersonType
+    xidea_person.person.form.factory.default.class: Xidea\Bundle\BaseBundle\Form\Factory\FormFactory
+    xidea_person.person.form.handler.default.class: Xidea\Bundle\PersonBundle\Form\Handler\PersonFormHandler
   
 services:
+    #services
     xidea_person.person.configuration.default:
         class: %xidea_person.person.configuration.default.class%
         arguments:
@@ -13,3 +23,50 @@ services:
         class: %xidea_person.person.factory.default.class%
         arguments:
             - %xidea_person.person.class%
+    #controllers
+    xidea_person.controller.list:
+        class: %xidea_person.controller.list.class%
+        arguments:
+            - @xidea_person.person.configuration
+            - @xidea_person.person.loader
+        calls:
+            - [setEventDispatcher, [@event_dispatcher]]
+            - [setTemplateManager, [@xidea_base.template_manager]]
+    xidea_person.controller.show:
+        class: %xidea_person.controller.show.class%
+        arguments:
+            - @xidea_person.person.configuration
+            - @xidea_person.person.loader
+        calls:
+            - [setEventDispatcher, [@event_dispatcher]]
+            - [setTemplateManager, [@xidea_base.template_manager]]
+    xidea_person.controller.create:
+        class: %xidea_person.controller.create.class%
+        arguments:
+            - @xidea_person.person.configuration
+            - @xidea_person.person.factory
+            - @xidea_person.person.manager
+            - @xidea_person.person.form.handler
+        calls:
+            - [setEventDispatcher, [@event_dispatcher]]
+            - [setRouter, [@router]]
+            - [setTemplateManager, [@xidea_base.template_manager]]
+    #forms
+    xidea_person.person.form.type:
+        class: %xidea_person.person.form.type.class%
+        arguments:
+            - %xidea_person.person.class%
+        tags:
+            - { name: form.type, alias: "xidea_person" }
+    xidea_person.person.form.factory.default:
+        class: %xidea_person.person.form.factory.default.class%
+        arguments:
+            - @form.factory
+            - %xidea_person.person.form.name%
+            - %xidea_person.person.form.type%
+            - %xidea_person.person.form.validation_groups%
+    xidea_person.person.form.handler.default:
+        class: %xidea_person.person.form.handler.default.class%
+        arguments:
+            - @xidea_person.person.form.factory
+            - @event_dispatcher

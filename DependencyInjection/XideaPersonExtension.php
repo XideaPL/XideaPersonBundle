@@ -23,9 +23,7 @@ class XideaPersonExtension extends AbstractExtension
 
         $loader->load('person.yml');
         $loader->load('person_orm.yml');
-        $loader->load('controller.yml');
-        $loader->load('form.yml');
-
+        
         $this->loadPersonSection($config['person'], $container, $loader);
         
         $this->loadTemplateSection($config, $container, $loader);

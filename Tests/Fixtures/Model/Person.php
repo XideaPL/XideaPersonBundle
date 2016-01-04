@@ -9,7 +9,7 @@
 
 namespace Xidea\Bundle\PersonBundle\Tests\Fixtures\Model;
 
-use Xidea\Person\AbstractPerson;
+use Xidea\Bundle\PersonBundle\Model\AbstractPerson;
 
 /**
  * @author Artur Pszczółka <artur.pszczolka@xidea.pl>
