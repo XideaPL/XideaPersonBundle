@@ -11,7 +11,8 @@ namespace Xidea\Bundle\PersonBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Description of RegistrationType
@@ -39,18 +40,20 @@ class PersonType extends AbstractType
                 ->add('name', null, array(
                     'label' => 'person.name'
                 ))
-                ->add('save', 'submit', array('label' => 'person_form.submit'))
+                ->add('save', SubmitType::class, array('label' => 'person_form.submit'))
         ;
     }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    
+    public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+        
         $resolver->setDefaults(array(
             'data_class' => $this->class
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'xidea_person';
     }

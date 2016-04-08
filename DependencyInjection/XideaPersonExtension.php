@@ -3,30 +3,36 @@
 namespace Xidea\Bundle\PersonBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-use Xidea\Bundle\BaseBundle\DependencyInjection\AbstractExtension;
+use Xidea\Bundle\BaseBundle\DependencyInjection\Helper\ExtensionHelper;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class XideaPersonExtension extends AbstractExtension
+class XideaPersonExtension extends Extension
 {
     /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        list($config, $loader) = $this->setUp($configs, new Configuration($this->getAlias()), $container);
+        $configuration = new Configuration($this->getAlias());
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('person.yml');
         $loader->load('person_orm.yml');
         
         $this->loadPersonSection($config['person'], $container, $loader);
         
-        $this->loadTemplateSection($config, $container, $loader);
+        $helper = new ExtensionHelper($this->getAlias());
+        $helper->loadTemplateSection($config, $this->getDefaultTemplates(), $container, $loader);
     }
     
     protected function loadPersonSection(array $config, ContainerBuilder $container, Loader\YamlFileLoader $loader)
@@ -52,12 +58,7 @@ class XideaPersonExtension extends AbstractExtension
         $container->setParameter('xidea_person.person.form.name', $config['person']['name']);
         $container->setParameter('xidea_person.person.form.validation_groups', $config['person']['validation_groups']);
     }
-    
-    protected function getConfigurationDirectory()
-    {
-        return __DIR__.'/../Resources/config';
-    }
-    
+
     protected function getDefaultTemplates()
     {
         return [

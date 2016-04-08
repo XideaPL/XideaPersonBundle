@@ -14,59 +14,59 @@ parameters:
 services:
     #services
     xidea_person.person.configuration.default:
-        class: %xidea_person.person.configuration.default.class%
+        class: '%xidea_person.person.configuration.default.class%'
         arguments:
-            - %xidea_person.person.code%
+            - '%xidea_person.person.code%'
         tags:
             - { name: xidea_base.configuration }
     xidea_person.person.factory.default:
-        class: %xidea_person.person.factory.default.class%
+        class: '%xidea_person.person.factory.default.class%'
         arguments:
-            - %xidea_person.person.class%
+            - '%xidea_person.person.class%'
     #controllers
     xidea_person.controller.list:
-        class: %xidea_person.controller.list.class%
+        class: '%xidea_person.controller.list.class%'
         arguments:
-            - @xidea_person.person.configuration
-            - @xidea_person.person.loader
+            - '@xidea_person.person.configuration'
+            - '@xidea_person.person.loader'
         calls:
-            - [setEventDispatcher, [@event_dispatcher]]
-            - [setTemplateManager, [@xidea_base.template_manager]]
+            - [setEventDispatcher, ['@event_dispatcher']]
+            - [setTemplateManager, ['@xidea_base.template_manager']]
     xidea_person.controller.show:
-        class: %xidea_person.controller.show.class%
+        class: '%xidea_person.controller.show.class%'
         arguments:
-            - @xidea_person.person.configuration
-            - @xidea_person.person.loader
+            - '@xidea_person.person.configuration'
+            - '@xidea_person.person.loader'
         calls:
-            - [setEventDispatcher, [@event_dispatcher]]
-            - [setTemplateManager, [@xidea_base.template_manager]]
+            - [setEventDispatcher, ['@event_dispatcher']]
+            - [setTemplateManager, ['@xidea_base.template_manager']]
     xidea_person.controller.create:
-        class: %xidea_person.controller.create.class%
+        class: '%xidea_person.controller.create.class%'
         arguments:
-            - @xidea_person.person.configuration
-            - @xidea_person.person.factory
-            - @xidea_person.person.manager
-            - @xidea_person.person.form.handler
+            - '@xidea_person.person.configuration'
+            - '@xidea_person.person.factory'
+            - '@xidea_person.person.manager'
+            - '@xidea_person.person.form.handler'
         calls:
-            - [setEventDispatcher, [@event_dispatcher]]
-            - [setRouter, [@router]]
-            - [setTemplateManager, [@xidea_base.template_manager]]
+            - [setEventDispatcher, ['@event_dispatcher']]
+            - [setRouter, ['@router']]
+            - [setTemplateManager, ['@xidea_base.template_manager']]
     #forms
     xidea_person.person.form.type:
-        class: %xidea_person.person.form.type.class%
+        class: '%xidea_person.person.form.type.class%'
         arguments:
-            - %xidea_person.person.class%
+            - '%xidea_person.person.class%'
         tags:
-            - { name: form.type, alias: "xidea_person" }
+            - { name: form.type }
     xidea_person.person.form.factory.default:
-        class: %xidea_person.person.form.factory.default.class%
+        class: '%xidea_person.person.form.factory.default.class%'
         arguments:
-            - @form.factory
-            - %xidea_person.person.form.name%
-            - %xidea_person.person.form.type%
-            - %xidea_person.person.form.validation_groups%
+            - '@form.factory'
+            - '%xidea_person.person.form.name%'
+            - '%xidea_person.person.form.type%'
+            - '%xidea_person.person.form.validation_groups%'
     xidea_person.person.form.handler.default:
-        class: %xidea_person.person.form.handler.default.class%
+        class: '%xidea_person.person.form.handler.default.class%'
         arguments:
-            - @xidea_person.person.form.factory
-            - @event_dispatcher
+            - '@xidea_person.person.form.factory'
+            - '@event_dispatcher'
